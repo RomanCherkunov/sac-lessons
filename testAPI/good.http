@@ -1,0 +1,15 @@
+GET http://localhost:8787/media?fileId=148b5d48c0ebf33bb1c65062db9e7936
+
+
+###
+
+POST http://localhost:8787/good
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.k0E4fCFP1VDoTcpmlvKekVYldTCQCb2NQVQICz-HSAM
+Content-type: multipart/form-data; boundary=MfnBoundary
+
+--MfnBoundary
+Content-Disposition: form-data; name="file"; filename="test.png"
+Content-type: image/png
+
+< C:\Program Files (x86)\Reference Assemblies\MSProjects\sacred\sacrLessons\lessons-clone\lessons\2.png
+--MfnBoundary--

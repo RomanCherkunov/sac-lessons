@@ -1,0 +1,21 @@
+GET http://localhost:8787/document
+content-type: application/json
+id: 6
+
+###
+
+POST http://localhost:8787/document
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.k0E4fCFP1VDoTcpmlvKekVYldTCQCb2NQVQICz-HSAM
+Content-type: multipart/form-data; boundary=MfnBoundary
+
+--MfnBoundary
+Content-Disposition: form-data; name="file"; filename="1.JPG"
+Content-type: image/jpeg
+
+< C:\Program Files (x86)\Reference Assemblies\MSProjects\sacred\sacrLessons\lessons-clone\lessons\1.JPG
+--MfnBoundary--
+
+###
+
+GET http://localhost:8787/api/private/document?id=7
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MX0.k0E4fCFP1VDoTcpmlvKekVYldTCQCb2NQVQICz-HSAM

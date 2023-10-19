@@ -42,7 +42,9 @@ const jwtMiddleware = async (req, res, next) => {
   }
 
   const findAccess = req.userData?.userRoles?.find(
-    (item) => item.controller === req.baseUrl.replaceAll("/", "")
+    (item) =>
+      item.controller ===
+      req.baseUrl.replaceAll("/api/private/", "").replaceAll("/", "")
   );
   if (findAccess) {
     next();
