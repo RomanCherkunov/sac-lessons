@@ -1,8 +1,8 @@
 const path = require("path");
 const Sequelize = require("sequelize");
 const config = require("../../config/config.json");
-const file = require("file");
 const { ErrorLoaderModule } = require("../../utils/class");
+const { walkDir } = require("../../utils/file");
 
 const db = {};
 
@@ -38,19 +38,20 @@ function capitalizeFirstLetterWithoutIndex(string) {
   return string[0].toUpperCase() + string.slice(1);
 }
 
-file.walkSync(__dirname, (dir, dirs, files) => {
+walkDir(__dirname, (dir, files) => {
   files
-    .filter((item) => {
-      return (
-        //Отфильтровываем файлы которые не удовлетворяют требования
-        (item !== basename || dir.replace(__dirname, "") !== "") &&
-        item.slice(-3) === ".js"
-      );
-    })
-    .forEach((item) => {
-      findFile.push(path.join(dir, item));
-    });
-});
+  .filter((item) => {
+    return (
+      //Отфильтровываем файлы которые не удовлетворяют требования
+      (item !== basename || dir.replace(__dirname, "") !== "") &&
+      item.slice(-3) === ".js"
+    );
+  })
+  .forEach((item) => {
+    findFile.push(path.join(dir, item));
+  });
+})
+
 
 const loaderFile = [];
 
