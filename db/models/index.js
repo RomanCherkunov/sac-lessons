@@ -2,7 +2,7 @@ const path = require("path");
 const Sequelize = require("sequelize");
 const config = require("../../config/config.json");
 const file = require("file");
-const { ErrorLoaderModule } = require("../../class");
+const { ErrorLoaderModule } = require("../../utils/class");
 
 const db = {};
 
@@ -10,17 +10,14 @@ const basename = path.basename(__filename);
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(
-    process.env[config.use_env_variable],
-    config.development
-  );
+  sequelize = new Sequelize(process.env[config.use_env_variable], config.db);
 } else {
   sequelize = new Sequelize(
-    config.development.database,
-    config.development.username,
-    config.development.password,
+    config.db.database,
+    config.db.username,
+    config.db.password,
     {
-      ...config.development,
+      ...config.db,
       logging: null,
     }
   );

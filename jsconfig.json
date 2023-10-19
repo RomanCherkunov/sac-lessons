@@ -5,8 +5,8 @@
     "paths": {
       "@utils": ["utils"],
       "@utils/*": ["utils/*"],
-      "@class": ["class"],
-      "@class/*": ["class/*"],
+      "@class": ["utils/class"],
+      "@class/*": ["utils/class/*"],
       "@models": ["db/models"],
       "@models/*": ["db/models/*"]
     }

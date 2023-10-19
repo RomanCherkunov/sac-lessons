@@ -1,27 +1,14 @@
 require("module-alias/register");
 require("./config");
 require("./events");
-const express = require("express");
+const {app} = require('./config')
 const wsServer = require("./wsServer");
 const { userRole, media } = require("@models");
-const fileUpload = require("express-fileupload");
 const initLoad = require("./controller");
-
-const app = express();
 
 if (typeof wsServer === "function") {
   wsServer(app);
 }
-
-app.use(express.json());
-app.use(
-  fileUpload({
-    createParentPath: true,
-    defParamCharset: "utf-8",
-    // useTempFiles: true,
-    // tempFileDir: "./temp_test",
-  })
-);
 if (typeof initLoad === "function") {
   initLoad(app);
 }
