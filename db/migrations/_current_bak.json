@@ -32,7 +32,7 @@
                     "field": "deletedAt",
                     "seqType": "Sequelize.DATE"
                 },
-                "mediaIdId": {
+                "mediaId": {
                     "allowNull": true,
                     "references": {
                         "model": "media",
@@ -40,7 +40,7 @@
                     },
                     "onDelete": "CASCADE",
                     "onUpdate": "NO ACTION",
-                    "field": "mediaIdId",
+                    "field": "mediaId",
                     "seqType": "Sequelize.INTEGER"
                 }
             },
@@ -161,6 +161,14 @@
                     "field": "description",
                     "seqType": "Sequelize.TEXT"
                 },
+                "price": {
+                    "field": "price",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "count": {
+                    "field": "count",
+                    "seqType": "Sequelize.TEXT"
+                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "createdAt",
@@ -194,6 +202,10 @@
                 },
                 "description": {
                     "field": "description",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "addSetting": {
+                    "field": "addSetting",
                     "seqType": "Sequelize.TEXT"
                 },
                 "createdAt": {
@@ -329,5 +341,5 @@
     "path": "C:\\Program Files (x86)\\Reference Assemblies\\MSProjects\\sacred\\sacrLessons\\lessons-clone\\lessons\\db\\migrations\\_current.json",
     "backupPath": "C:\\Program Files (x86)\\Reference Assemblies\\MSProjects\\sacred\\sacrLessons\\lessons-clone\\lessons\\db\\migrations\\_current_bak.json",
     "exists": true,
-    "revision": 11
+    "revision": 13
 }

@@ -40,18 +40,17 @@ function capitalizeFirstLetterWithoutIndex(string) {
 
 walkDir(__dirname, (dir, files) => {
   files
-  .filter((item) => {
-    return (
-      //Отфильтровываем файлы которые не удовлетворяют требования
-      (item !== basename || dir.replace(__dirname, "") !== "") &&
-      item.slice(-3) === ".js"
-    );
-  })
-  .forEach((item) => {
-    findFile.push(path.join(dir, item));
-  });
-})
-
+    .filter((item) => {
+      return (
+        //Отфильтровываем файлы которые не удовлетворяют требования
+        (item !== basename || dir.replace(__dirname, "") !== "") &&
+        item.slice(-3) === ".js"
+      );
+    })
+    .forEach((item) => {
+      findFile.push(path.join(dir, item));
+    });
+});
 
 const loaderFile = [];
 
@@ -103,5 +102,11 @@ if (typeof console.logUserDone === "function") {
 } else {
   console.log("SYSTEM", `DB-models:\n ${loaderFile.join(", ")}`);
 }
+
+db.queryBuilder = (model, ...args) => {
+  return db.sequelize.dialect.queryGenerator
+    .selectQuery(model.getTableName(), ...args)
+    ?.slice(0, -1);
+};
 
 module.exports = { ...db };

@@ -1,10 +1,11 @@
 require("module-alias/register");
 require("./config");
 require("./events");
-const {app} = require('./config')
+const { app } = require("./config");
 const wsServer = require("./wsServer");
-const { userRole, media } = require("@models");
+const { userRole, media, good, queryBuilder } = require("@models");
 const initLoad = require("./controller");
+const { Op, fn, literal } = require("sequelize");
 
 if (typeof wsServer === "function") {
   wsServer(app);
@@ -43,6 +44,26 @@ if (typeof initLoad === "function") {
 app.listen(8787, () => {
   console.log("server listen on port: 8787");
 });
+
+// good.create({caption: 'test6', count: 22, price: 51})
+
+good.findAll().then((data) => {
+  console.log(data.reduce((acc, req) => acc + req.full, 0));
+});
+
+console.log(
+  queryBuilder(good, {
+    attributes: [fn("count", "id")],
+    where: { caption: { [Op.getLike()]: "%234%" } },
+  })
+);
+
+const tempSQL =  queryBuilder(good, {
+  attributes: [fn("count", "id")],
+  where: { caption: { [Op.getLike()]: "%234%" } },
+})
+
+good.findAll({logging: console.log, attributes: [literal(`(${tempSQL})`)]})
 
 // media.findAll().then((data) => {
 //   console.log(data.map((item) => item.toJSON()));
@@ -94,3 +115,37 @@ app.listen(8787, () => {
 //   const { data, send } = props;
 //   send("new listener pong : " + data);
 // });
+
+// ////////////////////////////////////////////////////
+
+// class Test {
+//   prop1 = 1
+//   func1 (){}
+
+//   get prop2() {
+//     return '1'
+//   }
+//   set prop2(value) {
+
+//   }
+
+//   get transactionId() {
+//     return ''
+//   }
+
+//   set transactionId(value) {
+
+//   }
+// }
+
+// class Test2 extends Test {
+
+// }
+
+// const test = new Test()
+// const test2 = new Test2()
+//  console.log(test.prop2) // используется get
+// test.prop2 = 10  // используется set
+
+// test.transactionId = '100'
+// console.log('tr id',test.transactionId)
